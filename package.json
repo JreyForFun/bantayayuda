@@ -1,0 +1,20 @@
+{
+  "name": "bantayayuda",
+  "version": "1.0.0",
+  "description": "BantayAyuda - Community Assistance Management System",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "init-db": "node database/schema.js"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.17.4",
+    "dotenv": "^17.4.2",
+    "express": "^4.22.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
