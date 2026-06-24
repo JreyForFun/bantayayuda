@@ -1,6 +1,5 @@
 # 🤝 BantayAyuda — Community Assistance Management System
 
-> *"Walang Maiiwan, Walang Makukulong"*  
 > No one left behind. No one gets double.
 
 **BantayAyuda** is a digital platform designed for Local Government Units (LGUs), schools, and community organizations to streamline the management of assistance programs — eliminating duplicate claims, manual paperwork, and lack of accountability.

@@ -4,13 +4,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BantayAyuda — Login</title>
+  <title>BantayAyuda — Secure Login</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
 </head>
-<body>
-  <!-- Login form goes here -->
+<body class="login-layout">
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-logo">
+        <h1>BantayAyuda</h1>
+        <p>"Walang Maiiwan, Walang Makukulong"</p>
+      </div>
+      
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label" for="login-username">Username</label>
+          <input type="text" id="login-username" class="form-input" required placeholder="Enter username" autocomplete="username">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password</label>
+          <input type="password" id="login-password" class="form-input" required placeholder="Enter password" autocomplete="current-password">
+        </div>
+        
+        <div id="login-error" class="alert alert-error d-none mt-2"></div>
+        
+        <button type="submit" class="btn btn-primary btn-block mt-3">Access System</button>
+      </form>
+    </div>
+  </div>
+
   <script type="module" src="js/auth.js"></script>
 </body>
 </html>

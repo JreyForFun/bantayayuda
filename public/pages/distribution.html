@@ -1,1 +1,85 @@
-<!-- pages/distribution.html — Release terminal section -->
+<!-- public/pages/distribution.html — Releasing Terminal View -->
+<div class="page-header">
+  <div>
+    <h2>Distribution & Releasing Terminal</h2>
+    <p>Verify beneficiary claim codes and dispatch aid packages</p>
+  </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+  <!-- Left Side: Scanner / Code verification -->
+  <div class="card">
+    <div class="modal-header">
+      <h3>Scan or Enter Claim Code</h3>
+    </div>
+    <div class="card-body">
+      <form id="form-terminal-verify" class="claim-input-group">
+        <input type="text" id="terminal-claim-code" class="form-input" placeholder="e.g. BA-2026-X9K2" required style="font-family: monospace; letter-spacing: 2px;">
+        <button type="submit" id="btn-terminal-verify" class="btn btn-primary">Verify Code</button>
+      </form>
+      
+      <div id="terminal-error" class="alert alert-error d-none"></div>
+      <div id="terminal-success" class="alert alert-success d-none"></div>
+
+      <!-- Verification Panel (shown only when valid code checked) -->
+      <div id="terminal-result-panel" class="verify-result d-none mt-2">
+        <h4 style="border-bottom: 2px solid var(--blue); padding-bottom: 6px; color: var(--text); display: flex; align-items: center; gap: 6px;">
+          <i data-lucide="check-circle" style="width: 16px; height: 16px; color: var(--green);"></i>
+          Claim Verified & Ready
+        </h4>
+        
+        <div class="verify-result-row">
+          <span class="verify-result-label">Beneficiary:</span>
+          <span class="verify-result-value" id="res-beneficiary">Loading...</span>
+        </div>
+        <div class="verify-result-row">
+          <span class="verify-result-label">Address:</span>
+          <span class="verify-result-value" id="res-address">Loading...</span>
+        </div>
+        <div class="verify-result-row">
+          <span class="verify-result-label">Assistance Program:</span>
+          <span class="verify-result-value" id="res-program">Loading...</span>
+        </div>
+        <div class="verify-result-row">
+          <span class="verify-result-label">Category:</span>
+          <span class="verify-result-value" id="res-category">Loading...</span>
+        </div>
+        <div class="verify-result-row">
+          <span class="verify-result-label">Application Status:</span>
+          <span class="badge badge-approved" id="res-status">Approved</span>
+        </div>
+
+        <div class="form-group mt-2">
+          <label class="form-label" for="terminal-details">Handover Details / Serial Numbers</label>
+          <input type="text" id="terminal-details" class="form-input" placeholder="e.g. Cash Voucher Envelope #45 or Box #12">
+        </div>
+
+        <button id="btn-terminal-release" class="btn btn-success btn-block mt-3">Confirm & Release Ayuda</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side: Recent releases ledger -->
+  <div class="card">
+    <div class="modal-header">
+      <h3>Recent Releases Log</h3>
+    </div>
+    <div class="card-body" style="padding: 0; overflow-y: auto; max-height: 420px;">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Beneficiary</th>
+            <th>Program</th>
+            <th>Release Officer</th>
+          </tr>
+        </thead>
+        <tbody id="terminal-releases-body">
+          <tr>
+            <td colspan="4" class="text-muted text-center" style="padding: 40px 0;">Loading log...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,27 @@
-<!-- pages/audit-log.html — Audit log section (admin only) -->
+<!-- public/pages/audit-log.html — Audit Logs View -->
+<div class="page-header">
+  <div>
+    <h2>System Audit Logs</h2>
+    <p>Read-only security ledger tracking all user modifications and actions</p>
+  </div>
+</div>
+
+<div class="table-container">
+  <table class="table" id="table-audit-logs">
+    <thead>
+      <tr>
+        <th>Timestamp</th>
+        <th>User</th>
+        <th>Role</th>
+        <th>Action</th>
+        <th>Module</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody id="audit-logs-list-body">
+      <tr>
+        <td colspan="6" class="text-muted text-center" style="padding: 40px 0;">Loading log database...</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,1 +1,122 @@
-<!-- pages/reports.html — Reports section -->
+<!-- public/pages/reports.html — Reports View -->
+<div class="page-header no-print">
+  <div>
+    <h2>Reports & Analytics</h2>
+    <p>Compile database ledger summaries and export audit-ready reports</p>
+  </div>
+  <button id="btn-print-report" class="btn btn-outline no-print" style="display: flex; align-items: center; gap: 6px;">
+    <i data-lucide="printer" style="width: 14px; height: 14px;"></i>
+    Print / Export PDF
+  </button>
+</div>
+
+<!-- Filters Bar -->
+<div class="report-toolbar card no-print">
+  <div class="card-body" style="padding: 16px 20px;">
+    <div class="control-group" style="align-items: flex-end; gap: 16px; flex-wrap: wrap;">
+      <div class="form-group" style="margin-bottom: 0; min-width: 220px;">
+        <label class="form-label" for="report-type">Report Type</label>
+        <select id="report-type" class="form-select">
+          <option value="beneficiaries">Beneficiary Directory Ledger</option>
+          <option value="applications">Application Status Summary</option>
+          <option value="programs">Program Capacity & Dispatch Report</option>
+        </select>
+      </div>
+
+      <!-- Sub-Filters: Beneficiaries -->
+      <div id="sub-filter-beneficiary-group" class="control-group" style="gap: 12px;">
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label">Category</label>
+          <select id="report-beneficiary-category" class="form-select" style="min-width: 150px;">
+            <option value="All">All Categories</option>
+            <option value="Scholarship">Scholarship</option>
+            <option value="Medical">Medical</option>
+            <option value="Relief">Relief</option>
+            <option value="Livelihood">Livelihood</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label">Status</label>
+          <select id="report-beneficiary-status" class="form-select" style="min-width: 130px;">
+            <option value="All">All Statuses</option>
+            <option value="active">Active Only</option>
+            <option value="inactive">Inactive Only</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Sub-Filters: Applications -->
+      <div id="sub-filter-application-group" class="control-group d-none" style="gap: 12px;">
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label">Program</label>
+          <select id="report-application-program" class="form-select" style="min-width: 200px;">
+            <option value="All">All Programs</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label">Status</label>
+          <select id="report-application-status" class="form-select" style="min-width: 130px;">
+            <option value="All">All Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+            <option value="released">Released</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: flex-end; padding-bottom: 1px;">
+        <button id="btn-generate-report" class="btn btn-primary">Generate Report</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Empty state: shown BEFORE first report is generated -->
+<div id="report-empty-state" class="card mt-3">
+  <div class="card-body" style="padding: 60px 24px; text-align: center;">
+    <div style="margin-bottom: 12px; display: flex; justify-content: center; color: var(--text-muted);">
+      <i data-lucide="bar-chart-2" style="width: 36px; height: 36px; stroke-width: 1.5;"></i>
+    </div>
+    <h3 style="font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px;">No report generated yet</h3>
+    <p style="font-size: 13px; color: var(--text-muted);">Select a report type and filters above, then click <strong>Generate Report</strong>.</p>
+  </div>
+</div>
+
+<!-- Print Container: shown AFTER generation -->
+<div id="report-print-container" class="card mt-3 d-none">
+  <div class="card-body" style="padding: 32px;">
+    <!-- Print Header (only shown during generation / print) -->
+    <div id="report-print-header" style="text-align: center; margin-bottom: 24px;">
+      <h1 style="font-size: 20px; font-weight: 700; margin-bottom: 4px; color: var(--text);">BantayAyuda Official Ledger Report</h1>
+      <p style="font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;" id="report-title-display"></p>
+      <div style="font-size: 11px; color: var(--text-light); margin-top: 6px;" id="report-meta-display"></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Data Table -->
+    <div id="report-table-area" style="margin-top: 0; overflow-x: auto;">
+      <table class="table" id="table-report-data" style="border: none;">
+        <thead id="report-table-header"></thead>
+        <tbody id="report-table-body">
+          <tr>
+            <td class="text-muted text-center" style="padding: 40px 0;">Building report data...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sign-off (only visible when report is populated) -->
+    <div id="report-signoff" class="d-none" style="margin-top: 48px; display: flex; justify-content: space-between; font-size: 12px; padding-top: 24px; border-top: 1px solid var(--border);">
+      <div>
+        <p style="border-bottom: 1px solid var(--text); width: 200px; padding-bottom: 4px; font-weight: 600; color: var(--text);" id="signoff-officer"></p>
+        <p style="color: var(--text-muted); margin-top: 4px;">Report Sign-Off Officer</p>
+      </div>
+      <div style="text-align: center;">
+        <p style="border-bottom: 1px solid var(--text); width: 200px; padding-bottom: 4px; font-weight: 600; text-align: center; color: var(--text);">Verified & Audited</p>
+        <p style="color: var(--text-muted); margin-top: 4px;">BantayAyuda System Administrator</p>
+      </div>
+    </div>
+  </div>
+</div>
