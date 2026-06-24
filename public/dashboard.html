@@ -11,7 +11,27 @@
   <link rel="stylesheet" href="css/table.css">
 </head>
 <body>
-  <!-- Sidebar + Header + Viewport goes here -->
+  <aside class="sidebar">
+    <div class="logo">BantayAyuda</div>
+    <nav class="nav-menu">
+        <a href="#" class="nav-link active" id="nav-dashboard">Dashboard</a>
+        <a href="#" class="nav-link" id="nav-beneficiaries">Beneficiaries</a>
+        <a href="#" class="nav-link" id="nav-programs">Programs</a>
+        <a href="#" class="nav-link" id="nav-applications">Applications</a>
+        <a href="#" class="nav-link" id="nav-distribution">Distribution</a>
+        <a href="#" class="nav-link" id="nav-reports">Reports</a>
+        <a href="#" class="nav-link" id="nav-audit-log">Audit Logs</a>
+    </nav>
+  </aside>
+
+  <header class="top-header">
+    <h1 id="current-page-title">Dashboard</h1>
+    <span id="user-display-name">Welcome, Loading...</span>
+    <button id="btn-logout" class="btn btn-outline">Logout</button>
+  </header>
+
+  <main id="viewport" class="content-viewport"></main>
+
   <script type="module" src="js/app.js"></script>
 </body>
 </html>
