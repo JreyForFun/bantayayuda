@@ -1,1 +1,194 @@
 /* css/table.css — Tables, search bar, filter controls */
+
+/* =============================================
+   TABLE WRAPPER
+   ============================================= */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+  margin-top: 12px;
+}
+
+/* =============================================
+   TABLE CORE
+   ============================================= */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+
+.table th {
+  background: var(--bg-subtle);
+  padding: 10px 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  font-size: 10.5px;
+  letter-spacing: 0.6px;
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: middle;
+  font-size: 13px;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr {
+  transition: background var(--transition);
+}
+
+.table tbody tr:hover td {
+  background: var(--bg-subtle);
+}
+
+/* =============================================
+   CONTROL BAR (Search + Filters)
+   ============================================= */
+.control-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+/* =============================================
+   SEARCH INPUT
+   ============================================= */
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
+  max-width: 300px;
+}
+
+.search-input-wrapper::before {
+  content: "⌕";
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: var(--text-light);
+  pointer-events: none;
+  line-height: 1;
+}
+
+.search-input-wrapper input {
+  width: 100%;
+  padding: 7px 12px 7px 32px;
+  font-size: 13px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  outline: none;
+  background: var(--bg);
+  color: var(--text);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.search-input-wrapper input::placeholder {
+  color: var(--text-placeholder);
+}
+
+.search-input-wrapper input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 0.12);
+}
+
+/* =============================================
+   FILTER SELECT
+   ============================================= */
+.filter-select {
+  padding: 7px 30px 7px 10px;
+  font-size: 12.5px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+  cursor: pointer;
+  min-width: 140px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2394a3b8' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.filter-select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 0.12);
+}
+
+/* =============================================
+   TABLE ACTION BUTTONS
+   ============================================= */
+.table-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.btn-action {
+  padding: 4px 9px;
+  font-size: 11.5px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-muted);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.btn-action:hover {
+  background: var(--bg-muted);
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.btn-action.edit {
+  color: var(--blue);
+  border-color: var(--blue-muted);
+  background: var(--blue-light);
+}
+
+.btn-action.edit:hover {
+  background: var(--blue-muted);
+  border-color: var(--blue);
+}
+
+.btn-action.delete {
+  color: var(--red);
+  border-color: var(--red-muted);
+  background: var(--red-light);
+}
+
+.btn-action.delete:hover {
+  background: var(--red-muted);
+  border-color: var(--red);
+}

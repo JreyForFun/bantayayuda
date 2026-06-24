@@ -1,1 +1,102 @@
-<!-- pages/programs.html — Program management section -->
+<!-- public/pages/programs.html — Programs View -->
+<div class="page-header">
+  <div>
+    <h2>Assistance Programs</h2>
+    <p>Configure programs, allocate slot budgets, and track current usage</p>
+  </div>
+  <button id="btn-add-program" class="btn btn-primary">
+    <span>+</span> Create Program
+  </button>
+</div>
+
+<!-- Filters Bar -->
+<div class="control-bar">
+  <div class="control-group">
+    <select id="filter-program-category" class="filter-select">
+      <option value="All">All Categories</option>
+      <option value="Scholarship">Scholarship</option>
+      <option value="Medical">Medical</option>
+      <option value="Relief">Relief</option>
+      <option value="Livelihood">Livelihood</option>
+    </select>
+    
+    <select id="filter-program-status" class="filter-select">
+      <option value="All">All Statuses</option>
+      <option value="active">Active Only</option>
+      <option value="closed">Closed Only</option>
+    </select>
+  </div>
+</div>
+
+<!-- Cards Grid -->
+<div id="programs-grid" class="cards-grid">
+  <!-- Dynamic cards loaded by JS -->
+  <div class="text-muted text-center" style="grid-column: 1 / -1; padding: 40px 0;">Loading programs...</div>
+</div>
+
+<!-- Add/Edit Program Modal -->
+<div id="modal-program" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="program-modal-title">Create Assistance Program</h3>
+      <button class="btn-ghost close-modal" style="font-size: 16px;">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="form-program">
+        <input type="hidden" id="program-id">
+        
+        <div class="form-group">
+          <label class="form-label" for="program-name">Program Name</label>
+          <input type="text" id="program-name" class="form-input" required placeholder="e.g. Rice Relief Pack Distribution 2026">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="program-description">Description</label>
+          <textarea id="program-description" class="form-textarea" required rows="3" placeholder="Describe the assistance program criteria and details..."></textarea>
+        </div>
+        
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="program-category">Category</label>
+            <select id="program-category" class="form-select" required>
+              <option value="" disabled selected>Select Category</option>
+              <option value="Scholarship">Scholarship</option>
+              <option value="Medical">Medical</option>
+              <option value="Relief">Relief</option>
+              <option value="Livelihood">Livelihood</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="program-slots">Budget Slots</label>
+            <input type="number" id="program-slots" class="form-input" required min="1" placeholder="e.g. 100">
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="program-start-date">Start Date</label>
+            <input type="date" id="program-start-date" class="form-input" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="program-end-date">End Date</label>
+            <input type="date" id="program-end-date" class="form-input" required>
+          </div>
+        </div>
+        
+        <div class="form-group" id="program-status-group">
+          <label class="form-label" for="program-status">Status</label>
+          <select id="program-status" class="form-select">
+            <option value="active">Active</option>
+            <option value="closed">Closed</option>
+          </select>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline close-modal">Cancel</button>
+      <button type="submit" form="form-program" class="btn btn-primary" id="btn-save-program">Save Program</button>
+    </div>
+  </div>
+</div>

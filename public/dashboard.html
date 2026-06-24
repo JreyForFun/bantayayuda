@@ -4,34 +4,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BantayAyuda — Dashboard</title>
+  <title>BantayAyuda — Dashboard Console</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/table.css">
+  <!-- Lucide Icons (same library used by ShadCN) -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
-<body>
+<body class="app-layout">
   <aside class="sidebar">
-    <div class="logo">BantayAyuda</div>
+    <div class="sidebar-logo">
+      <h2>BantayAyuda</h2>
+      <p>LGU Assistance Portal</p>
+    </div>
+
     <nav class="nav-menu">
-        <a href="#" class="nav-link active" id="nav-dashboard">Dashboard</a>
-        <a href="#" class="nav-link" id="nav-beneficiaries">Beneficiaries</a>
-        <a href="#" class="nav-link" id="nav-programs">Programs</a>
-        <a href="#" class="nav-link" id="nav-applications">Applications</a>
-        <a href="#" class="nav-link" id="nav-distribution">Distribution</a>
-        <a href="#" class="nav-link" id="nav-reports">Reports</a>
-        <a href="#" class="nav-link" id="nav-audit-log">Audit Logs</a>
+      <span class="nav-section-label">Core Modules</span>
+
+      <a href="#" class="nav-link active" id="nav-dashboard">
+        <i data-lucide="layout-dashboard" class="nav-icon"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" class="nav-link" id="nav-beneficiaries">
+        <i data-lucide="users" class="nav-icon"></i>
+        <span>Beneficiaries</span>
+      </a>
+      <a href="#" class="nav-link" id="nav-programs">
+        <i data-lucide="clipboard-list" class="nav-icon"></i>
+        <span>Programs</span>
+      </a>
+      <a href="#" class="nav-link" id="nav-applications">
+        <i data-lucide="file-text" class="nav-icon"></i>
+        <span>Applications</span>
+      </a>
+
+      <span class="nav-section-label">Operations</span>
+
+      <a href="#" class="nav-link" id="nav-distribution">
+        <i data-lucide="scan-barcode" class="nav-icon"></i>
+        <span>Distribution Terminal</span>
+      </a>
+      <a href="#" class="nav-link" id="nav-reports">
+        <i data-lucide="bar-chart-2" class="nav-icon"></i>
+        <span>Reports</span>
+      </a>
+      <a href="#" class="nav-link admin-nav" id="nav-audit-log">
+        <i data-lucide="shield-check" class="nav-icon"></i>
+        <span>Audit Logs</span>
+      </a>
     </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-user-avatar" id="user-avatar">AD</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name" id="user-name">Loading...</div>
+          <div class="sidebar-user-role" id="user-role">role</div>
+        </div>
+      </div>
+    </div>
   </aside>
 
-  <header class="top-header">
-    <h1 id="current-page-title">Dashboard</h1>
-    <span id="user-display-name">Welcome, Loading...</span>
-    <button id="btn-logout" class="btn btn-outline">Logout</button>
-  </header>
+  <div class="main-content">
+    <header class="top-header">
+      <h1 id="current-page-title">Dashboard</h1>
+      <div class="header-right">
+        <span id="user-display-name">Welcome, Loading...</span>
+        <button id="btn-logout" class="btn btn-outline btn-sm">Logout</button>
+      </div>
+    </header>
 
-  <main id="viewport" class="content-viewport"></main>
+    <main id="viewport" class="content-viewport"></main>
+  </div>
 
+  <!-- SMS Simulator Widget -->
+  <div id="sms-simulator-phone" class="phone-simulator">
+    <div class="phone-screen">
+      <div class="sms-header">
+        <span>Messages · BantayAyuda</span>
+        <span>now</span>
+      </div>
+      <div class="sms-bubble">
+        <p id="sms-simulator-text">Loading message...</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialise Lucide icons as soon as this script runs (before module loads)
+    lucide.createIcons();
+  </script>
   <script type="module" src="js/app.js"></script>
 </body>
 </html>
