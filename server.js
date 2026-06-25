@@ -1,5 +1,4 @@
-// server.js — Entry point
-// Express app setup + mount all routes
+// server.js — Entry point and API router setup
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';

@@ -1,5 +1,4 @@
-// database/db.js
-// Turso client singleton — import this in all route files
+// database/db.js — Turso client singleton
 import { createClient } from '@libsql/client';
 import dotenv from 'dotenv';
 

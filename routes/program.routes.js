@@ -87,10 +87,14 @@ router.put('/:id', requireAuth, async (req, res) => {
 router.delete('/:id', requireAdmin, async (req, res) => {
   const { id } = req.params;
   try {
+    // Delete dependent records first to satisfy foreign key constraints
+    await db.execute({ sql: "DELETE FROM distributions WHERE program_id=?", args: [id] });
+    await db.execute({ sql: "DELETE FROM applications WHERE program_id=?", args: [id] });
     await db.execute({ sql: "DELETE FROM programs WHERE id=?", args: [id] });
-    return res.json({ message: 'Program deleted.' });
+    return res.json({ message: 'Program and all associated records deleted.' });
   } catch (err) {
-    return res.status(500).json({ error: 'Failed to delete program.' });
+    console.error('DELETE /api/programs/:id error:', err);
+    return res.status(500).json({ error: `Failed to delete program: ${err.message}` });
   }
 });
 

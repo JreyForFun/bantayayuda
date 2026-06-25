@@ -122,10 +122,13 @@ router.patch('/:id/status', requireAuth, async (req, res) => {
 router.delete('/:id', requireAdmin, async (req, res) => {
   const { id } = req.params;
   try {
+    // Delete dependent records first to satisfy foreign key constraints
+    await db.execute({ sql: "DELETE FROM distributions WHERE application_id=?", args: [id] });
     await db.execute({ sql: "DELETE FROM applications WHERE id=?", args: [id] });
-    return res.json({ message: 'Application deleted.' });
+    return res.json({ message: 'Application and all associated records deleted.' });
   } catch (err) {
-    return res.status(500).json({ error: 'Failed to delete application.' });
+    console.error('DELETE /api/applications/:id error:', err);
+    return res.status(500).json({ error: `Failed to delete application: ${err.message}` });
   }
 });
 
