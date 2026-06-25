@@ -500,7 +500,8 @@
    PRINT MEDIA
    ============================================= */
 @media print {
-  .no-print { display: none !important; }
+  .no-print,
+  .phone-simulator { display: none !important; }
   .sidebar,
   .top-header { display: none !important; }
   .main-content { margin: 0; }

@@ -42,8 +42,19 @@ export async function init() {
     }
   }
 
+  // Helper to reset report card and print button visibility
+  function resetReportView() {
+    emptyState.classList.remove('d-none');
+    printContainer.classList.add('d-none');
+    btnPrint.classList.add('d-none');
+    signoffSection.classList.add('d-none');
+    body.innerHTML = '';
+    headerRow.innerHTML = '';
+  }
+
   // 2. Manage Sub-Filters Visibility
   reportType.addEventListener('change', () => {
+    resetReportView();
     const val = reportType.value;
     if (val === 'beneficiaries') {
       bfGroup.classList.remove('d-none');
@@ -58,10 +69,18 @@ export async function init() {
     }
   });
 
+  bfCategory.addEventListener('change', resetReportView);
+  bfStatus.addEventListener('change', resetReportView);
+  appProgram.addEventListener('change', resetReportView);
+  appStatus.addEventListener('change', resetReportView);
+
   // 3. Generate Report handler
   btnGenerate.addEventListener('click', async () => {
     const type = reportType.value;
 
+    // Hide print button while compiling
+    btnPrint.classList.add('d-none');
+    
     // Show print container, hide empty state
     emptyState.classList.add('d-none');
     printContainer.classList.remove('d-none');
@@ -99,8 +118,12 @@ export async function init() {
         const data = await apiFetch('/reports/programs');
         renderProgramReport(data);
       }
+      
+      // Successfully generated, show print button!
+      btnPrint.classList.remove('d-none');
     } catch (err) {
       body.innerHTML = `<tr><td class="text-muted text-center" style="padding: 40px 0; color: var(--red);">Error generating report: ${err.message}</td></tr>`;
+      btnPrint.classList.add('d-none');
     }
   });
 
